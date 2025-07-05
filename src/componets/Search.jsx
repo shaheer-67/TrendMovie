@@ -1,4 +1,6 @@
 import React from "react";
+import searchIcon from "../assets/search.png";
+
 
 const Search = ({ searchTerm , setsearchTerm}) => {
   return (
@@ -7,7 +9,7 @@ const Search = ({ searchTerm , setsearchTerm}) => {
 
       <div>
 
-      <img src="./src/assets/search.png" alt="" />
+      <img src={searchIcon} alt="" />
       <input
         type="text"
         placeholder="Search any kind of movie here"

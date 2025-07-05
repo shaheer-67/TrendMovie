@@ -4,6 +4,8 @@ import Spinner from "./componets/Spinner";
 import MovieCard from "./componets/MovieCard";
 import { useDebounce } from "react-use";
 import { getTrendingMovies, updateSearchCount } from "./appwrite";
+import heroImage from "./assets/hero.png";
+
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 
@@ -86,7 +88,7 @@ function App() {
       <div className="pattern " />
       <div className="wrapper">
         <header>
-          <img src="./src/assets/hero.png" alt="header-image" />
+          <img src={heroImage} alt="header-image" />
           <h1>
             Find <span className="text-gradient">Movie</span> You'll Enjoy
             Without the Hasslse
