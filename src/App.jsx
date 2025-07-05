@@ -26,6 +26,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [dedaunceSearchTerm, setdedaunceSearchTerm] = useState("");
   const [TrendingMovies, setTrendingMovies] = useState([]);
+  const [trendingLoading, settrendingLoading] = useState(false);
+
   //debaunce the search term  to prevent  making to many apis request ;
   //by waiting for the userfor stop typing  for 500ms
 
@@ -66,12 +68,15 @@ function App() {
     }
   };
   const loadTrendingMovies = async ()=>{
+    settrendingLoading(true);
     try {
       const movies = await getTrendingMovies();
-      setTrendingMovies(movies)
+      setTrendingMovies(movies);
       
     } catch (error) {
       console.log(`error fetching trending movies ${error}`)
+    }finally{
+      settrendingLoading(false);
     }
   }
 
@@ -98,17 +103,23 @@ function App() {
 
        {TrendingMovies.length > 0 && (
           <section className="trending">
-            <h2>Trending Movies</h2>
+  <h2>Trending Movies</h2>
+  {trendingLoading ? (
+    <Spinner />
+  ) : TrendingMovies.length > 0 ? (
+    <ul>
+      {TrendingMovies.map((movie, index) => (
+        <li key={movie.$id}>
+          <p>{index + 1}</p>
+          <img src={movie.poster_url} alt={movie.title} />
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p>No trending movies found.</p>
+  )}
+</section>
 
-            <ul>
-              {TrendingMovies.map((movie, index) => (
-                <li key={movie.$id}>
-                  <p>{index + 1}</p>
-                  <img src={movie.poster_url} alt={movie.title} />
-                </li>
-              ))}
-            </ul>
-          </section>
         )}
 
 
